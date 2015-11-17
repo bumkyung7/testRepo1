@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration PUBLIC "-//LOG4J//DTD LOG4J//EN" "http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/xml/doc-files/log4j.dtd" >
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+	<!-- Appenders --> <!-- 어디에다가 출력할꺼니 -->
+	<!-- Console에 출력하는 ConsoleAppender를 stdout(name속성)이름으로 등록 -->
+	<appender name="stdout" class="org.apache.log4j.ConsoleAppender">
+		<param name="Target" value="System.out" />
+		
+		<!-- 출력 메세지의 형태 지정 : Layout -->
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{yy-MM-dd HH:mm:ss.SSS} %5p %C [%M :%L] %m%n" />
+		</layout>
+	</appender>
+
+	<appender name="dailyRollingFile" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="c:\\java\\mylog.log" />
+		<param name="DatePattern" value="'-'yyyyMMdd'.log'" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{yy-MM-dd HH:mm:ss.SSS} %5p %C [%M :%L] %m%n" />
+		</layout>
+	</appender>
+
+<!-- 
+
+	Logger : 로깅을 관리하는 Component(Container) 
+	 root : 기본로거를 등록
+	 로그 priority(우선순위:레벨) 등록
+
+-->
+
+	
+	<root>
+		<priority value="debug" />
+		<appender-ref ref="stdout" />
+		<appender-ref ref="dailyRollingFile"/>
+	</root>
+</log4j:configuration>
